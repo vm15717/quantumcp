@@ -39,3 +39,16 @@ static const CmplxMatrix hgate = {
         1.0f/std::sqrt(2.0f), -1.0f/std::sqrt(2.0f)
     }
 };
+
+void WaitForEnter (){
+    printf("\nPress Enter to quit:");
+    fflush(stdin);
+    getchar();
+}
+
+Qubit ApplyGate (const Qubit& qubit, const CmplxMatrix& gate){
+    return {
+        gate[0] * qubit[0] + gate[1] * qubit[1],
+        gate[2] * qubit[0] + gate[3] * qubit[1]
+    };
+};
