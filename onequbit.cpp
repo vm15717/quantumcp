@@ -10,6 +10,7 @@ static const Qubit qubit0 = {1.0f, 0.0f};
 static const Qubit qubit1 = {0.0f, 1.0f};
 static const Qubit qubit_plus = {1.0f/ std::sqrt(2.0), 1.0f/ std::sqrt(2.0)};
 static const Qubit qubit_minus = {1.0f/ std::sqrt(2.0), -1.0f/ std::sqrt(2.0)};
+//static const Qubit qubit_iplus = {std::complex<float>(1.0f, 0.0f) * std::sqrt(2.0), std::complex<float>(0.0f, 1.0f)/std::sqrt(2.0)};
 
 
 static const CmplxMatrix xgate = {
