@@ -21,8 +21,8 @@ static const CmplxMatrix xgate = {
 
 static const CmplxMatrix ygate = {
     {
-        {0.0f, 0.0f}, {0.0f, -1.0f},
-        {0.0f, 1.0f}, {0.0f, 0.0f}
+        std::complex<float>(0.0f, 0.0f), std::complex<float>(0.0f, -1.0f),
+        std::complex<float>(0.0f, 1.0f), std::complex<float>(0.0f, 0.0f)
     }
 };
 
@@ -52,3 +52,37 @@ Qubit ApplyGate (const Qubit& qubit, const CmplxMatrix& gate){
         gate[2] * qubit[0] + gate[3] * qubit[1]
     };
 };
+
+int Prob (const Qubit& qubit){
+    float prob = std::round((qubit[1] * std::conj(qubit[1])).real());
+    return prob;
+}
+
+CmplxMatrix ChangePhase(float radians){
+    return {
+        {
+            1.0f, 0.0f,
+            0.0f, std::exp(std::complex<float>(0.0f, 1.0f) * radians)
+        }
+    };
+}
+
+void Print (const Qubit& qubit){
+    printf("[(%0.2f, %0.2fi), (%0.2f, %0.2fi)] %i%% true", 
+    qubit[0].real(), qubit[0].imag(), qubit[1].real(), qubit[1].imag(), Prob(qubit));
+}
+
+
+int main(int argc, char **argv){
+    {
+        printf("Not Gate: \n");
+        Qubit v = qubit0;
+        Print(v);
+        printf("\n ! = ");
+        v = ApplyGate(v, xgate);
+        Print(v);
+        printf("\n\n");
+    }
+    WaitForEnter();
+    return 0;
+}
