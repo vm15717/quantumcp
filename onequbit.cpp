@@ -10,7 +10,10 @@ static const Qubit qubit0 = {1.0f, 0.0f};
 static const Qubit qubit1 = {0.0f, 1.0f};
 static const Qubit qubit_plus = {1.0f/ std::sqrt(2.0), 1.0f/ std::sqrt(2.0)};
 static const Qubit qubit_minus = {1.0f/ std::sqrt(2.0), -1.0f/ std::sqrt(2.0)};
-//static const Qubit qubit_iplus = {std::complex<float>(1.0f, 0.0f) * std::sqrt(2.0), std::complex<float>(0.0f, 1.0f)/std::sqrt(2.0)};
+static const Qubit qubit_iplus = {std::complex<float>(1.0f, 0.0f)/ std::complex<float>(std::sqrt(2.0), 0.0f), 
+std::complex<float>(0.0f, 1.0f)/std::complex<float>(std::sqrt(2.0), 0.0f)};
+static const Qubit qubit_iminus = {std::complex<float>(1.0f, 0.0f)/ std::complex<float>(std::sqrt(2.0), 0.0f), 
+std::complex<float>(0.0f, -1.0f)/std::complex<float>(std::sqrt(2.0), 0.0f)};
 
 
 static const CmplxMatrix xgate = {
@@ -78,6 +81,15 @@ int main(int argc, char **argv){
     {
         printf("Not Gate: \n");
         Qubit v = qubit0;
+        Print(v);
+        printf("\n ! = ");
+        v = ApplyGate(v, xgate);
+        Print(v);
+        printf("\n\n");
+    }
+    {
+        printf("Not Gate: \n");
+        Qubit v = qubit_iplus;
         Print(v);
         printf("\n ! = ");
         v = ApplyGate(v, xgate);
